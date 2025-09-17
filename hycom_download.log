@@ -1,0 +1,147 @@
+2025-09-17 14:49:06,749 - INFO - Starting HYCOM Data Download - Monthly Processing
+2025-09-17 14:49:06,750 - INFO - ==================================================
+2025-09-17 14:49:06,750 - INFO - Date range: 2022-12-01 to 2022-12-31
+2025-09-17 14:49:06,750 - INFO - Variables: ['water_u', 'water_v']
+2025-09-17 14:49:06,751 - INFO - Geographic bounds: -2°N to 0.5°N, 116.5°E to 119°E
+2025-09-17 14:49:06,751 - INFO - Output directory: hycom_data
+2025-09-17 14:49:06,752 - INFO - 
+Processing month: 2022-12
+2025-09-17 14:49:06,783 - INFO - Downloading hycom_water_u_20221201.nc (attempt 1/3)
+2025-09-17 14:49:26,219 - INFO - Successfully downloaded: hycom_water_u_20221201.nc
+2025-09-17 14:49:26,229 - INFO - Downloading hycom_water_v_20221201.nc (attempt 1/3)
+2025-09-17 14:49:38,118 - INFO - Successfully downloaded: hycom_water_v_20221201.nc
+2025-09-17 14:49:38,122 - INFO - Downloading hycom_water_u_20221202.nc (attempt 1/3)
+2025-09-17 14:50:38,710 - WARNING - Download attempt 1 failed for hycom_water_u_20221202.nc: HTTPSConnectionPool(host='ncss.hycom.org', port=443): Read timed out. (read timeout=60)
+2025-09-17 14:50:38,711 - INFO - Retrying in 1 seconds...
+2025-09-17 14:50:39,717 - INFO - Downloading hycom_water_u_20221202.nc (attempt 2/3)
+2025-09-17 14:50:52,661 - INFO - Successfully downloaded: hycom_water_u_20221202.nc
+2025-09-17 14:50:52,671 - INFO - Downloading hycom_water_v_20221202.nc (attempt 1/3)
+2025-09-17 14:51:08,600 - INFO - Successfully downloaded: hycom_water_v_20221202.nc
+2025-09-17 14:51:08,606 - INFO - Downloading hycom_water_u_20221203.nc (attempt 1/3)
+2025-09-17 14:51:25,541 - INFO - Successfully downloaded: hycom_water_u_20221203.nc
+2025-09-17 14:51:25,544 - INFO - Downloading hycom_water_v_20221203.nc (attempt 1/3)
+2025-09-17 14:51:49,957 - INFO - Successfully downloaded: hycom_water_v_20221203.nc
+2025-09-17 14:51:49,963 - INFO - Downloading hycom_water_u_20221204.nc (attempt 1/3)
+2025-09-17 14:52:09,235 - INFO - Successfully downloaded: hycom_water_u_20221204.nc
+2025-09-17 14:52:09,237 - INFO - Downloading hycom_water_v_20221204.nc (attempt 1/3)
+2025-09-17 14:52:53,531 - INFO - Successfully downloaded: hycom_water_v_20221204.nc
+2025-09-17 14:52:53,534 - INFO - Downloading hycom_water_u_20221205.nc (attempt 1/3)
+2025-09-17 14:53:08,148 - INFO - Successfully downloaded: hycom_water_u_20221205.nc
+2025-09-17 14:53:08,150 - INFO - Downloading hycom_water_v_20221205.nc (attempt 1/3)
+2025-09-17 14:53:31,947 - INFO - Successfully downloaded: hycom_water_v_20221205.nc
+2025-09-17 14:53:31,954 - INFO - Downloading hycom_water_u_20221206.nc (attempt 1/3)
+2025-09-17 14:54:28,654 - INFO - Successfully downloaded: hycom_water_u_20221206.nc
+2025-09-17 14:54:28,656 - INFO - Downloading hycom_water_v_20221206.nc (attempt 1/3)
+2025-09-17 14:54:41,902 - INFO - Successfully downloaded: hycom_water_v_20221206.nc
+2025-09-17 14:54:41,906 - INFO - Downloading hycom_water_u_20221207.nc (attempt 1/3)
+2025-09-17 14:54:53,307 - INFO - Successfully downloaded: hycom_water_u_20221207.nc
+2025-09-17 14:54:53,311 - INFO - Downloading hycom_water_v_20221207.nc (attempt 1/3)
+2025-09-17 14:55:05,959 - INFO - Successfully downloaded: hycom_water_v_20221207.nc
+2025-09-17 14:55:05,966 - INFO - Downloading hycom_water_u_20221208.nc (attempt 1/3)
+2025-09-17 14:55:20,827 - INFO - Successfully downloaded: hycom_water_u_20221208.nc
+2025-09-17 14:55:20,840 - INFO - Downloading hycom_water_v_20221208.nc (attempt 1/3)
+2025-09-17 14:55:35,755 - INFO - Successfully downloaded: hycom_water_v_20221208.nc
+2025-09-17 14:55:35,766 - INFO - Downloading hycom_water_u_20221209.nc (attempt 1/3)
+2025-09-17 14:55:50,644 - INFO - Successfully downloaded: hycom_water_u_20221209.nc
+2025-09-17 14:55:50,647 - INFO - Downloading hycom_water_v_20221209.nc (attempt 1/3)
+2025-09-17 14:56:06,116 - INFO - Successfully downloaded: hycom_water_v_20221209.nc
+2025-09-17 14:56:06,120 - INFO - Downloading hycom_water_u_20221210.nc (attempt 1/3)
+2025-09-17 14:56:21,503 - INFO - Successfully downloaded: hycom_water_u_20221210.nc
+2025-09-17 14:56:21,506 - INFO - Downloading hycom_water_v_20221210.nc (attempt 1/3)
+2025-09-17 14:56:36,602 - INFO - Successfully downloaded: hycom_water_v_20221210.nc
+2025-09-17 14:56:36,607 - INFO - Downloading hycom_water_u_20221211.nc (attempt 1/3)
+2025-09-17 14:56:52,591 - INFO - Successfully downloaded: hycom_water_u_20221211.nc
+2025-09-17 14:56:52,595 - INFO - Downloading hycom_water_v_20221211.nc (attempt 1/3)
+2025-09-17 14:57:10,792 - INFO - Successfully downloaded: hycom_water_v_20221211.nc
+2025-09-17 14:57:10,794 - INFO - Downloading hycom_water_u_20221212.nc (attempt 1/3)
+2025-09-17 14:57:28,515 - INFO - Successfully downloaded: hycom_water_u_20221212.nc
+2025-09-17 14:57:28,523 - INFO - Downloading hycom_water_v_20221212.nc (attempt 1/3)
+2025-09-17 14:57:45,689 - INFO - Successfully downloaded: hycom_water_v_20221212.nc
+2025-09-17 14:57:45,691 - INFO - Downloading hycom_water_u_20221213.nc (attempt 1/3)
+2025-09-17 14:58:00,732 - INFO - Successfully downloaded: hycom_water_u_20221213.nc
+2025-09-17 14:58:00,740 - INFO - Downloading hycom_water_v_20221213.nc (attempt 1/3)
+2025-09-17 14:58:18,860 - INFO - Successfully downloaded: hycom_water_v_20221213.nc
+2025-09-17 14:58:18,867 - INFO - Downloading hycom_water_u_20221214.nc (attempt 1/3)
+2025-09-17 14:58:34,795 - INFO - Successfully downloaded: hycom_water_u_20221214.nc
+2025-09-17 14:58:34,804 - INFO - Downloading hycom_water_v_20221214.nc (attempt 1/3)
+2025-09-17 14:58:49,903 - INFO - Successfully downloaded: hycom_water_v_20221214.nc
+2025-09-17 14:58:49,915 - INFO - Downloading hycom_water_u_20221215.nc (attempt 1/3)
+2025-09-17 14:59:02,912 - INFO - Successfully downloaded: hycom_water_u_20221215.nc
+2025-09-17 14:59:02,915 - INFO - Downloading hycom_water_v_20221215.nc (attempt 1/3)
+2025-09-17 14:59:17,234 - INFO - Successfully downloaded: hycom_water_v_20221215.nc
+2025-09-17 14:59:17,237 - INFO - Downloading hycom_water_u_20221216.nc (attempt 1/3)
+2025-09-17 14:59:30,137 - INFO - Successfully downloaded: hycom_water_u_20221216.nc
+2025-09-17 14:59:30,143 - INFO - Downloading hycom_water_v_20221216.nc (attempt 1/3)
+2025-09-17 14:59:41,474 - INFO - Successfully downloaded: hycom_water_v_20221216.nc
+2025-09-17 14:59:41,482 - INFO - Downloading hycom_water_u_20221217.nc (attempt 1/3)
+2025-09-17 14:59:56,504 - INFO - Successfully downloaded: hycom_water_u_20221217.nc
+2025-09-17 14:59:56,506 - INFO - Downloading hycom_water_v_20221217.nc (attempt 1/3)
+2025-09-17 15:00:10,090 - INFO - Successfully downloaded: hycom_water_v_20221217.nc
+2025-09-17 15:00:10,092 - INFO - Downloading hycom_water_u_20221218.nc (attempt 1/3)
+2025-09-17 15:00:25,166 - INFO - Successfully downloaded: hycom_water_u_20221218.nc
+2025-09-17 15:00:25,169 - INFO - Downloading hycom_water_v_20221218.nc (attempt 1/3)
+2025-09-17 15:00:39,967 - INFO - Successfully downloaded: hycom_water_v_20221218.nc
+2025-09-17 15:00:39,969 - INFO - Downloading hycom_water_u_20221219.nc (attempt 1/3)
+2025-09-17 15:00:51,737 - INFO - Successfully downloaded: hycom_water_u_20221219.nc
+2025-09-17 15:00:51,740 - INFO - Downloading hycom_water_v_20221219.nc (attempt 1/3)
+2025-09-17 15:01:02,003 - INFO - Successfully downloaded: hycom_water_v_20221219.nc
+2025-09-17 15:01:02,005 - INFO - Downloading hycom_water_u_20221220.nc (attempt 1/3)
+2025-09-17 15:01:13,957 - INFO - Successfully downloaded: hycom_water_u_20221220.nc
+2025-09-17 15:01:13,966 - INFO - Downloading hycom_water_v_20221220.nc (attempt 1/3)
+2025-09-17 15:01:25,850 - INFO - Successfully downloaded: hycom_water_v_20221220.nc
+2025-09-17 15:01:25,853 - INFO - Downloading hycom_water_u_20221221.nc (attempt 1/3)
+2025-09-17 15:01:40,935 - INFO - Successfully downloaded: hycom_water_u_20221221.nc
+2025-09-17 15:01:40,939 - INFO - Downloading hycom_water_v_20221221.nc (attempt 1/3)
+2025-09-17 15:01:55,609 - INFO - Successfully downloaded: hycom_water_v_20221221.nc
+2025-09-17 15:01:55,612 - INFO - Downloading hycom_water_u_20221222.nc (attempt 1/3)
+2025-09-17 15:02:09,146 - INFO - Successfully downloaded: hycom_water_u_20221222.nc
+2025-09-17 15:02:09,150 - INFO - Downloading hycom_water_v_20221222.nc (attempt 1/3)
+2025-09-17 15:02:21,647 - INFO - Successfully downloaded: hycom_water_v_20221222.nc
+2025-09-17 15:02:21,650 - INFO - Downloading hycom_water_u_20221223.nc (attempt 1/3)
+2025-09-17 15:02:34,228 - INFO - Successfully downloaded: hycom_water_u_20221223.nc
+2025-09-17 15:02:34,231 - INFO - Downloading hycom_water_v_20221223.nc (attempt 1/3)
+2025-09-17 15:02:47,478 - INFO - Successfully downloaded: hycom_water_v_20221223.nc
+2025-09-17 15:02:47,485 - INFO - Downloading hycom_water_u_20221224.nc (attempt 1/3)
+2025-09-17 15:03:00,931 - INFO - Successfully downloaded: hycom_water_u_20221224.nc
+2025-09-17 15:03:00,933 - INFO - Downloading hycom_water_v_20221224.nc (attempt 1/3)
+2025-09-17 15:03:12,290 - INFO - Successfully downloaded: hycom_water_v_20221224.nc
+2025-09-17 15:03:12,297 - INFO - Downloading hycom_water_u_20221225.nc (attempt 1/3)
+2025-09-17 15:03:25,364 - INFO - Successfully downloaded: hycom_water_u_20221225.nc
+2025-09-17 15:03:25,368 - INFO - Downloading hycom_water_v_20221225.nc (attempt 1/3)
+2025-09-17 15:03:38,849 - INFO - Successfully downloaded: hycom_water_v_20221225.nc
+2025-09-17 15:03:38,858 - INFO - Downloading hycom_water_u_20221226.nc (attempt 1/3)
+2025-09-17 15:03:50,482 - INFO - Successfully downloaded: hycom_water_u_20221226.nc
+2025-09-17 15:03:50,494 - INFO - Downloading hycom_water_v_20221226.nc (attempt 1/3)
+2025-09-17 15:04:03,413 - INFO - Successfully downloaded: hycom_water_v_20221226.nc
+2025-09-17 15:04:03,416 - INFO - Downloading hycom_water_u_20221227.nc (attempt 1/3)
+2025-09-17 15:04:18,187 - INFO - Successfully downloaded: hycom_water_u_20221227.nc
+2025-09-17 15:04:18,189 - INFO - Downloading hycom_water_v_20221227.nc (attempt 1/3)
+2025-09-17 15:04:31,274 - INFO - Successfully downloaded: hycom_water_v_20221227.nc
+2025-09-17 15:04:31,276 - INFO - Downloading hycom_water_u_20221228.nc (attempt 1/3)
+2025-09-17 15:04:46,487 - INFO - Successfully downloaded: hycom_water_u_20221228.nc
+2025-09-17 15:04:46,491 - INFO - Downloading hycom_water_v_20221228.nc (attempt 1/3)
+2025-09-17 15:05:42,920 - INFO - Successfully downloaded: hycom_water_v_20221228.nc
+2025-09-17 15:05:42,922 - INFO - Downloading hycom_water_u_20221229.nc (attempt 1/3)
+2025-09-17 15:05:56,092 - INFO - Successfully downloaded: hycom_water_u_20221229.nc
+2025-09-17 15:05:56,095 - INFO - Downloading hycom_water_v_20221229.nc (attempt 1/3)
+2025-09-17 15:06:18,811 - INFO - Successfully downloaded: hycom_water_v_20221229.nc
+2025-09-17 15:06:18,813 - INFO - Downloading hycom_water_u_20221230.nc (attempt 1/3)
+2025-09-17 15:06:42,199 - INFO - Successfully downloaded: hycom_water_u_20221230.nc
+2025-09-17 15:06:42,202 - INFO - Downloading hycom_water_v_20221230.nc (attempt 1/3)
+2025-09-17 15:07:00,708 - INFO - Successfully downloaded: hycom_water_v_20221230.nc
+2025-09-17 15:07:00,710 - INFO - Downloading hycom_water_u_20221231.nc (attempt 1/3)
+2025-09-17 15:07:17,033 - INFO - Successfully downloaded: hycom_water_u_20221231.nc
+2025-09-17 15:07:17,034 - INFO - Downloading hycom_water_v_20221231.nc (attempt 1/3)
+2025-09-17 15:07:34,404 - INFO - Successfully downloaded: hycom_water_v_20221231.nc
+2025-09-17 15:07:34,414 - INFO - Downloaded 62/62 files for 2022-12
+2025-09-17 15:07:34,415 - INFO - Combining files for 2022-12...
+2025-09-17 15:07:34,416 - INFO - Combining 62 files...
+2025-09-17 15:07:34,431 - INFO - Combining 31 files for variable: water_u
+2025-09-17 15:07:35,630 - INFO - Successfully combined 31 files for water_u
+2025-09-17 15:07:35,636 - INFO - Combining 31 files for variable: water_v
+2025-09-17 15:07:36,444 - INFO - Successfully combined 31 files for water_v
+2025-09-17 15:07:36,451 - INFO - Successfully created combined dataset with variables: ['water_u', 'water_v']
+2025-09-17 15:07:36,453 - INFO - Saving NetCDF file: HYCOM_combined_202212.nc
+2025-09-17 15:07:40,280 - ERROR - Failed to process files for 2022-12: 'numpy.ndarray' object has no attribute 'values'
+2025-09-17 15:07:40,281 - INFO - Cleaning up temporary directory...
+2025-09-17 15:07:40,298 - INFO - Download process completed!
