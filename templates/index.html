@@ -1,0 +1,521 @@
+{% extends "base.html" %}
+
+{% block title %}HYCOM Data Downloader - Home{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Configuration Panel -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-cog"></i> Configuration
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="configForm">
+                    <!-- Geographic Bounds -->
+                    <div class="mb-3">
+                        <h6 class="text-primary">Geographic Bounds</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="westLon" class="form-label">West Longitude</label>
+                                <input type="number" class="form-control" id="westLon" step="0.1" min="-180" max="180">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="eastLon" class="form-label">East Longitude</label>
+                                <input type="number" class="form-control" id="eastLon" step="0.1" min="-180" max="180">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-6">
+                                <label for="southLat" class="form-label">South Latitude</label>
+                                <input type="number" class="form-control" id="southLat" step="0.1" min="-90" max="90">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="northLat" class="form-label">North Latitude</label>
+                                <input type="number" class="form-control" id="northLat" step="0.1" min="-90" max="90">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Date Range -->
+                    <div class="mb-3">
+                        <h6 class="text-primary">Date Range</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="dateStart" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="dateStart">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="dateEnd" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="dateEnd">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Variables -->
+                    <div class="mb-3">
+                        <h6 class="text-primary">Variables</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="water_u" id="varWaterU" checked>
+                            <label class="form-check-label" for="varWaterU">
+                                Water U (Eastward velocity)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="water_v" id="varWaterV" checked>
+                            <label class="form-check-label" for="varWaterV">
+                                Water V (Northward velocity)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="salinity" id="varSalinity">
+                            <label class="form-check-label" for="varSalinity">
+                                Salinity
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="temperature" id="varTemperature">
+                            <label class="form-check-label" for="varTemperature">
+                                Temperature
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Download Settings -->
+                    <div class="mb-3">
+                        <h6 class="text-primary">Download Settings</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="maxRetries" class="form-label">Max Retries</label>
+                                <input type="number" class="form-control" id="maxRetries" min="1" max="10" value="3">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="timeout" class="form-label">Timeout (seconds)</label>
+                                <input type="number" class="form-control" id="timeout" min="10" max="300" value="60">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Configuration
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Control Panel -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-download"></i> Download Control
+                </h5>
+            </div>
+            <div class="card-body">
+                <!-- Status Display -->
+                <div id="statusPanel" class="mb-3">
+                    <div class="alert alert-info" id="statusAlert">
+                        <i class="fas fa-info-circle"></i> <span id="statusText">Ready to download</span>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div id="progressContainer" class="d-none">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span id="progressText">0%</span>
+                            <span id="fileCount">0 / 0 files</span>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                        <div class="mt-2">
+                            <small class="text-muted" id="currentFile">Ready</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="d-grid gap-2">
+                    <button type="button" class="btn btn-success" id="startBtn" onclick="startDownload()">
+                        <i class="fas fa-play"></i> Start Download
+                    </button>
+                    <button type="button" class="btn btn-danger d-none" id="stopBtn" onclick="stopDownload()">
+                        <i class="fas fa-stop"></i> Stop Download
+                    </button>
+                </div>
+
+                <!-- Download Info -->
+                <div class="mt-3">
+                    <h6 class="text-primary">Download Information</h6>
+                    <div id="downloadInfo">
+                        <p class="mb-1"><strong>Estimated Files:</strong> <span id="estimatedFiles">0</span></p>
+                        <p class="mb-1"><strong>Date Range:</strong> <span id="dateRange">Not set</span></p>
+                        <p class="mb-1"><strong>Variables:</strong> <span id="selectedVars">None selected</span></p>
+                        <p class="mb-0"><strong>Geographic Area:</strong> <span id="geoArea">Not set</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Files Panel (Hidden by default) -->
+<div class="row mt-4 d-none" id="filesPanel">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-folder"></i> Downloaded Files
+                </h5>
+                <button type="button" class="btn btn-sm btn-outline-secondary" onclick="hideFiles()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+            </div>
+            <div class="card-body">
+                <div id="filesList">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Loading files...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Log Panel -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-list"></i> Download Log
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="logContainer" style="height: 200px; overflow-y: auto; background-color: #f8f9fa; padding: 10px; border-radius: 5px;">
+                    <div class="log-entry">
+                        <span class="text-muted">[System]</span> Application started. Ready to download HYCOM data.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Initialize the application
+$(document).ready(function() {
+    loadConfiguration();
+    updateDownloadInfo();
+    startStatusPolling();
+});
+
+// Load current configuration
+function loadConfiguration() {
+    $.get('/api/config')
+        .done(function(config) {
+            $('#westLon').val(config.west_lon);
+            $('#eastLon').val(config.east_lon);
+            $('#southLat').val(config.south_lat);
+            $('#northLat').val(config.north_lat);
+            $('#dateStart').val(config.date_start);
+            $('#dateEnd').val(config.date_end);
+            $('#maxRetries').val(config.max_retries);
+            $('#timeout').val(config.timeout);
+            
+            // Set variables
+            config.variables.forEach(function(varName) {
+                $('#var' + varName.charAt(0).toUpperCase() + varName.slice(1).replace('_', '')).prop('checked', true);
+            });
+            
+            updateDownloadInfo();
+        })
+        .fail(function() {
+            addLogEntry('Error loading configuration', 'error');
+        });
+}
+
+// Save configuration
+$('#configForm').on('submit', function(e) {
+    e.preventDefault();
+    
+    const variables = [];
+    $('input[type="checkbox"]:checked').each(function() {
+        variables.push($(this).val());
+    });
+    
+    const config = {
+        west_lon: parseFloat($('#westLon').val()),
+        east_lon: parseFloat($('#eastLon').val()),
+        south_lat: parseFloat($('#southLat').val()),
+        north_lat: parseFloat($('#northLat').val()),
+        date_start: $('#dateStart').val(),
+        date_end: $('#dateEnd').val(),
+        variables: variables,
+        max_retries: parseInt($('#maxRetries').val()),
+        timeout: parseInt($('#timeout').val())
+    };
+    
+    $.ajax({
+        url: '/api/config',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(config)
+    })
+    .done(function(response) {
+        addLogEntry('Configuration saved successfully', 'success');
+        updateDownloadInfo();
+    })
+    .fail(function(xhr) {
+        const error = xhr.responseJSON ? xhr.responseJSON.message : 'Failed to save configuration';
+        addLogEntry('Error: ' + error, 'error');
+    });
+});
+
+// Update download information
+function updateDownloadInfo() {
+    const startDate = $('#dateStart').val();
+    const endDate = $('#dateEnd').val();
+    const variables = $('input[type="checkbox"]:checked').length;
+    const westLon = $('#westLon').val();
+    const eastLon = $('#eastLon').val();
+    const southLat = $('#southLat').val();
+    const northLat = $('#northLat').val();
+    
+    if (startDate && endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1;
+        const estimatedFiles = days * variables;
+        
+        $('#estimatedFiles').text(estimatedFiles);
+        $('#dateRange').text(startDate + ' to ' + endDate);
+    } else {
+        $('#estimatedFiles').text('0');
+        $('#dateRange').text('Not set');
+    }
+    
+    const selectedVars = [];
+    $('input[type="checkbox"]:checked').each(function() {
+        selectedVars.push($(this).val());
+    });
+    $('#selectedVars').text(selectedVars.length > 0 ? selectedVars.join(', ') : 'None selected');
+    
+    if (westLon && eastLon && southLat && northLat) {
+        $('#geoArea').text(`${southLat}°N to ${northLat}°N, ${westLon}°E to ${eastLon}°E`);
+    } else {
+        $('#geoArea').text('Not set');
+    }
+}
+
+// Update download info when form changes
+$('#configForm input, #configForm select').on('change', updateDownloadInfo);
+
+// Start download
+function startDownload() {
+    $.post('/api/start_download')
+        .done(function(response) {
+            addLogEntry('Download started', 'info');
+            $('#startBtn').addClass('d-none');
+            $('#stopBtn').removeClass('d-none');
+            $('#progressContainer').removeClass('d-none');
+        })
+        .fail(function(xhr) {
+            const error = xhr.responseJSON ? xhr.responseJSON.message : 'Failed to start download';
+            addLogEntry('Error: ' + error, 'error');
+        });
+}
+
+// Stop download
+function stopDownload() {
+    $.post('/api/stop_download')
+        .done(function(response) {
+            addLogEntry('Download stopped', 'warning');
+            $('#startBtn').removeClass('d-none');
+            $('#stopBtn').addClass('d-none');
+        })
+        .fail(function(xhr) {
+            const error = xhr.responseJSON ? xhr.responseJSON.message : 'Failed to stop download';
+            addLogEntry('Error: ' + error, 'error');
+        });
+}
+
+// Poll for status updates
+function startStatusPolling() {
+    setInterval(function() {
+        $.get('/api/status')
+            .done(function(status) {
+                updateStatus(status);
+            })
+            .fail(function() {
+                // Silently fail to avoid spam
+            });
+    }, 2000);
+}
+
+// Update status display
+function updateStatus(status) {
+    const statusAlert = $('#statusAlert');
+    const statusText = $('#statusText');
+    const progressBar = $('#progressBar');
+    const progressText = $('#progressText');
+    const fileCount = $('#fileCount');
+    const currentFile = $('#currentFile');
+    
+    // Update status text and alert type
+    statusText.text(status.status_message || 'Ready');
+    
+    if (status.is_running) {
+        statusAlert.removeClass('alert-info alert-success alert-danger alert-warning')
+                  .addClass('alert-info');
+        statusText.html('<i class="fas fa-spinner fa-spin"></i> ' + (status.status_message || 'Downloading...'));
+    } else if (status.error) {
+        statusAlert.removeClass('alert-info alert-success alert-danger alert-warning')
+                  .addClass('alert-danger');
+        statusText.html('<i class="fas fa-exclamation-triangle"></i> ' + status.error);
+    } else if (status.end_time) {
+        statusAlert.removeClass('alert-info alert-success alert-danger alert-warning')
+                  .addClass('alert-success');
+        statusText.html('<i class="fas fa-check-circle"></i> ' + (status.status_message || 'Download completed'));
+    } else {
+        statusAlert.removeClass('alert-info alert-success alert-danger alert-warning')
+                  .addClass('alert-info');
+    }
+    
+    // Update progress
+    if (status.total_files > 0) {
+        const progress = (status.progress / status.total_files) * 100;
+        progressBar.css('width', progress + '%');
+        progressText.text(Math.round(progress) + '%');
+        fileCount.text(`${status.progress} / ${status.total_files} files`);
+    }
+    
+    // Update current file
+    if (status.current_file) {
+        currentFile.text('Current: ' + status.current_file);
+    }
+    
+    // Update button states
+    if (status.is_running) {
+        $('#startBtn').addClass('d-none');
+        $('#stopBtn').removeClass('d-none');
+        $('#progressContainer').removeClass('d-none');
+    } else {
+        $('#startBtn').removeClass('d-none');
+        $('#stopBtn').addClass('d-none');
+    }
+}
+
+// Show files panel
+function showFiles() {
+    $('#filesPanel').removeClass('d-none');
+    loadFiles();
+}
+
+// Hide files panel
+function hideFiles() {
+    $('#filesPanel').addClass('d-none');
+}
+
+// Load files list
+function loadFiles() {
+    $.get('/api/files')
+        .done(function(response) {
+            displayFiles(response.files);
+        })
+        .fail(function() {
+            $('#filesList').html('<div class="alert alert-danger">Failed to load files</div>');
+        });
+}
+
+// Display files
+function displayFiles(files) {
+    if (files.length === 0) {
+        $('#filesList').html('<div class="alert alert-info">No files found</div>');
+        return;
+    }
+    
+    let html = '<div class="table-responsive"><table class="table table-striped">';
+    html += '<thead><tr><th>File Name</th><th>Size</th><th>Created</th><th>Actions</th></tr></thead><tbody>';
+    
+    files.forEach(function(file) {
+        const size = formatFileSize(file.size);
+        const created = new Date(file.created).toLocaleString();
+        
+        html += '<tr>';
+        html += `<td><i class="fas fa-file-archive"></i> ${file.name}</td>`;
+        html += `<td>${size}</td>`;
+        html += `<td>${created}</td>`;
+        html += '<td>';
+        html += `<button class="btn btn-sm btn-primary me-1" onclick="downloadFile('${file.name}')">
+                    <i class="fas fa-download"></i> Download
+                 </button>`;
+        html += `<button class="btn btn-sm btn-danger" onclick="deleteFile('${file.name}')">
+                    <i class="fas fa-trash"></i> Delete
+                 </button>`;
+        html += '</td>';
+        html += '</tr>';
+    });
+    
+    html += '</tbody></table></div>';
+    $('#filesList').html(html);
+}
+
+// Download file
+function downloadFile(filename) {
+    window.open('/api/download/' + encodeURIComponent(filename), '_blank');
+}
+
+// Delete file
+function deleteFile(filename) {
+    if (confirm('Are you sure you want to delete ' + filename + '?')) {
+        $.ajax({
+            url: '/api/delete/' + encodeURIComponent(filename),
+            method: 'DELETE'
+        })
+        .done(function() {
+            addLogEntry('File deleted: ' + filename, 'info');
+            loadFiles();
+        })
+        .fail(function(xhr) {
+            const error = xhr.responseJSON ? xhr.responseJSON.message : 'Failed to delete file';
+            addLogEntry('Error: ' + error, 'error');
+        });
+    }
+}
+
+// Format file size
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+// Add log entry
+function addLogEntry(message, type) {
+    const timestamp = new Date().toLocaleTimeString();
+    const icon = type === 'error' ? 'fas fa-exclamation-circle' : 
+                 type === 'success' ? 'fas fa-check-circle' : 
+                 type === 'warning' ? 'fas fa-exclamation-triangle' : 'fas fa-info-circle';
+    
+    const logEntry = $(`<div class="log-entry">
+        <span class="text-muted">[${timestamp}]</span> 
+        <i class="${icon}"></i> ${message}
+    </div>`);
+    
+    $('#logContainer').append(logEntry);
+    $('#logContainer').scrollTop($('#logContainer')[0].scrollHeight);
+}
+</script>
+{% endblock %}
